@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- 侧边栏导航 -->
     <nav id="sidebar">
@@ -26,13 +28,14 @@
             <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> 联系方式</a></li>
         </ul>
         <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/wushuanglang?tab=repositories" target="_blank">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
         </div>
     </nav>
 
-    <!-- 移动端侧边栏切换按钮 -->
+    <!-- 侧边栏导航按钮 -->
     <button id="sidebar-toggle">
         <i class="fas fa-bars"></i>
     </button>
@@ -44,34 +47,84 @@
             <h2 class="section-title">联系方式</h2>
             <div class="contact-container">
                 <div class="contact-info">
+                    <h3>联系我</h3>
+                    <p>如果您对我的工作感兴趣，或者有任何合作意向，请通过以下表单与我联系。我会尽快回复您的消息。</p>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <p>your.email@example.com</p>
+                        <div>
+                            <h4>邮箱</h4>
+                            <p>暂时保密</p>
+                        </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <p>+86 123 4567 8910</p>
+                        <div>
+                            <h4>电话</h4>
+                            <p>暂时保密</p>
+                        </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>北京市朝阳区</p>
+                        <i class="fab fa-weixin"></i>
+                        <div>
+                            <h4>微信</h4>
+                            <p>wushuanglang666</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <h3>发送消息</h3>
+                    <form id="contactForm" action="https://formspree.io/f/mwpbpyzj" method="POST" accept-charset="UTF-8">
+                        <!-- Formspree 配置字段 -->
+                        <input type="hidden" name="_next" value="thank-you.html">
+                        <input type="hidden" name="_subject" value="来自个人网站的新消息">
+
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                            <label for="name">姓名 <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                            <span class="error-message" id="name-error"></span>
                         </div>
+
+                        <div class="contact-methods">
+                            <h4>联系方式 <span class="required">*</span> <span class="contact-note">(至少填写一项)</span></h4>
+
+                            <div class="form-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                                <input type="hidden" name="_replyto" id="replyto">
+                                <span class="error-message" id="email-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">电话号码</label>
+                                <input type="tel" id="phone" name="phone" placeholder="138-xxxx-xxxx">
+                                <span class="error-message" id="phone-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wechat">微信号</label>
+                                <input type="text" id="wechat" name="wechat" placeholder="您的微信号">
+                                <span class="error-message" id="wechat-error"></span>
+                            </div>
+
+                            <span class="error-message" id="contact-methods-error"></span>
+                        </div>
+
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="您的邮箱" required>
+                            <label for="subject">主题</label>
+                            <input type="text" id="subject" name="subject" placeholder="请简要描述您的需求">
                         </div>
+
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="主题" required>
+                            <label for="message">留言内容 <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" placeholder="请详细描述您的需求或想法..." required></textarea>
+                            <span class="error-message" id="message-error"></span>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="您的留言" required></textarea>
-                        </div>
-                        <button type="submit" class="btn submit-btn">发送留言</button>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            发送消息
+                        </button>
                     </form>
                 </div>
             </div>
@@ -85,4 +138,5 @@
 
     <script src="js/script.js"></script>
 </body>
-</html> 
+
+</html>

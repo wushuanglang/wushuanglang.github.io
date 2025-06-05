@@ -19,26 +19,168 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 处理联系表单提交（仅在联系页面）
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        // 表单验证函数
+        function validateForm() {
+            let isValid = true;
+
+            // 清除之前的错误信息
+            clearErrors();
+
+            // 验证姓名
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                showError('name', '请输入您的姓名');
+                isValid = false;
+            }
+
+            // 验证联系方式（至少填写一项）
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const wechat = document.getElementById('wechat').value.trim();
+
+            if (!email && !phone && !wechat) {
+                showError('contact-methods', '请至少填写一种联系方式');
+                isValid = false;
+            } else {
+                // 验证邮箱格式（如果填写了）
+                if (email && !isValidEmail(email)) {
+                    showError('email', '请输入有效的邮箱地址');
+                    isValid = false;
+                }
+
+                // 验证电话格式（如果填写了）
+                if (phone && !isValidPhone(phone)) {
+                    showError('phone', '请输入有效的电话号码');
+                    isValid = false;
+                }
+            }
+
+            // 验证留言内容
+            const message = document.getElementById('message').value.trim();
+            if (!message) {
+                showError('message', '请输入留言内容');
+                isValid = false;
+            } else if (message.length < 10) {
+                showError('message', '留言内容至少需要10个字符');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // 显示错误信息
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + '-error');
+            const inputElement = document.getElementById(fieldId);
+
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+
+            if (inputElement) {
+                inputElement.classList.add('error');
+            }
+        }
+
+        // 清除错误信息
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            const inputElements = document.querySelectorAll('.form-group input, .form-group textarea');
+
+            errorElements.forEach(element => {
+                element.textContent = '';
+            });
+
+            inputElements.forEach(element => {
+                element.classList.remove('error');
+            });
+        }
+
+        // 验证邮箱格式
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // 验证电话格式
+        function isValidPhone(phone) {
+            const phoneRegex = /^[\d\s\-\+\(\)]{8,}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // 实时验证
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                // 移除错误样式当用户开始输入
+                if (input.value.trim()) {
+                    input.classList.remove('error');
+                    const errorElement = document.getElementById(input.id + '-error');
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                    }
+                }
+            });
+        });
+
+        // 邮箱字段变化时，同步更新 _replyto 字段
+        const emailInput = document.getElementById('email');
+        const replytoInput = document.getElementById('replyto');
+        if (emailInput && replytoInput) {
+            emailInput.addEventListener('input', () => {
+                replytoInput.value = emailInput.value;
+            });
+        }
+
+        // 表单提交处理
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // 获取表单数据
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
-            // 在实际应用中，这里应该发送数据到服务器
-            // 这里仅做演示，打印数据并显示成功消息
-            console.log('表单数据:', formData);
-            
-            // 显示提交成功消息
-            alert('您的消息已成功发送！');
-            
-            // 清空表单
-            contactForm.reset();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // 禁用提交按钮，防止重复提交
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发送中...';
+
+            try {
+                // 创建 FormData 对象
+                const formData = new FormData(contactForm);
+
+                // 发送到 Formspree
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // 提交成功
+                    alert('您的消息已成功发送！我会尽快回复您。');
+                    contactForm.reset();
+                    clearErrors();
+                } else {
+                    // 提交失败
+                    const data = await response.json();
+                    if (data.errors) {
+                        alert('发送失败：' + data.errors.map(error => error.message).join(', '));
+                    } else {
+                        alert('发送失败，请稍后重试。');
+                    }
+                }
+            } catch (error) {
+                console.error('提交错误:', error);
+                alert('网络错误，请检查网络连接后重试。');
+            } finally {
+                // 恢复提交按钮
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
         });
     }
     
