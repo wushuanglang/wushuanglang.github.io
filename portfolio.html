@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- 侧边栏导航 -->
     <nav id="sidebar">
@@ -43,42 +45,80 @@
         <!-- 作品集部分 -->
         <section id="portfolio" class="section">
             <h2 class="section-title">作品集</h2>
-            <h3 class="section-subtitle">个人项目展示</h3>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="images/project1.jpg" alt="项目1">
-                    <div class="portfolio-overlay">
-                        <h3>电商网站重设计</h3>
-                        <p>为客户重新设计并开发现代化电子商务平台</p>
-                        <a href="#" class="btn">查看详情</a>
+            <h3 class="section-subtitle">作品演示视频</h3>
+            <div class="demo-video-section">
+                <!-- <h4 class="demo-title">项目演示视频</h4> -->
+                <div class="video-grid">
+                    <div class="video-item">
+                        <div class="video-container" id="demoVideo1">
+                            <div class="video-loading" id="videoLoading1">
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <iframe
+                                src="https://player.bilibili.com/player.html?isOutside=true&aid=112981429980975&bvid=BV19qWNexER4&cid=500001653403693&p=1"
+                                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                                onload="handleVideoLoad('demoVideo1', 'videoLoading1')">
+                            </iframe>
+                        </div>
+                        <h5 class="video-title">项目演示 - 主要功能</h5>
+                        <div class="video-info">
+                            <p>展示项目的主要功能模块和核心业务逻辑实现</p>
+                            <a href="#" class="btn video-detail-btn">查看详情</a>
+                        </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="images/project2.jpg" alt="项目2">
-                    <div class="portfolio-overlay">
-                        <h3>移动应用界面</h3>
-                        <p>为健康追踪应用设计直观、易用的用户界面</p>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="video-item">
+                        <div class="video-container" id="demoVideo2">
+                            <div class="video-loading" id="videoLoading2">
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <iframe
+                                src="https://player.bilibili.com/player.html?isOutside=true&aid=112981429980975&bvid=BV19qWNexER4&cid=500001653403693&p=1"
+                                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                                onload="handleVideoLoad('demoVideo2', 'videoLoading2')">
+                            </iframe>
+                        </div>
+                        <h5 class="video-title">项目演示 - 用户界面</h5>
+                        <div class="video-info">
+                            <p>展示项目的用户界面设计和交互体验优化</p>
+                            <a href="#" class="btn video-detail-btn">查看详情</a>
+                        </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="images/project3.jpg" alt="项目3">
-                    <div class="portfolio-overlay">
-                        <h3>企业官网开发</h3>
-                        <p>为科技公司开发响应式企业官方网站</p>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="video-item">
+                        <div class="video-container" id="demoVideo3">
+                            <div class="video-loading" id="videoLoading3">
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <iframe
+                                src="https://player.bilibili.com/player.html?isOutside=true&aid=112981429980975&bvid=BV19qWNexER4&cid=500001653403693&p=1"
+                                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                                onload="handleVideoLoad('demoVideo3', 'videoLoading3')">
+                            </iframe>
+                        </div>
+                        <h5 class="video-title">项目演示 - 核心算法</h5>
+                        <div class="video-info">
+                            <p>深入展示项目核心算法的设计思路和实现过程</p>
+                            <a href="#" class="btn video-detail-btn">查看详情</a>
+                        </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="images/project4.jpg" alt="项目4">
-                    <div class="portfolio-overlay">
-                        <h3>数据可视化平台</h3>
-                        <p>开发交互式数据可视化仪表板，展示复杂统计数据</p>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="video-item">
+                        <div class="video-container" id="demoVideo4">
+                            <div class="video-loading" id="videoLoading4">
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <iframe
+                                src="https://player.bilibili.com/player.html?isOutside=true&aid=112981429980975&bvid=BV19qWNexER4&cid=500001653403693&p=1"
+                                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
+                                onload="handleVideoLoad('demoVideo4', 'videoLoading4')">
+                            </iframe>
+                        </div>
+                        <h5 class="video-title">项目演示 - 性能测试</h5>
+                        <div class="video-info">
+                            <p>展示项目的性能优化成果和压力测试结果</p>
+                            <a href="#" class="btn video-detail-btn">查看详情</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <h3 class="section-subtitle">开源项目展示</h3>
         </section>
 
         <!-- 页脚部分 -->
@@ -89,4 +129,5 @@
 
     <script src="js/script.js"></script>
 </body>
-</html> 
+
+</html>

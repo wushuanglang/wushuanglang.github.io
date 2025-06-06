@@ -226,11 +226,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!e.target.classList.contains('btn')) {
                     const overlay = item.querySelector('.portfolio-overlay');
                     if (overlay) {
-                        overlay.style.transform = overlay.style.transform === 'translateY(0px)' ? 
+                        overlay.style.transform = overlay.style.transform === 'translateY(0px)' ?
                             'translateY(100px)' : 'translateY(0px)';
                     }
                 }
             });
         });
     }
-}); 
+
+    // 视频项目不再需要点击交互，因为现在使用悬停效果
+});
+
+// 处理视频加载的全局函数
+function handleVideoLoad(videoContainerId, loadingElementId) {
+    const videoContainer = document.getElementById(videoContainerId);
+    const loadingElement = document.getElementById(loadingElementId);
+
+    if (videoContainer && loadingElement) {
+        // 添加加载完成的类
+        videoContainer.classList.add('loaded');
+        // 隐藏加载动画
+        loadingElement.style.display = 'none';
+    }
+}
+
+// 视频加载超时处理
+document.addEventListener('DOMContentLoaded', () => {
+    // 处理多个视频的加载超时
+    const videoContainers = [
+        { container: 'demoVideo1', loading: 'videoLoading1' },
+        { container: 'demoVideo2', loading: 'videoLoading2' },
+        { container: 'demoVideo3', loading: 'videoLoading3' },
+        { container: 'demoVideo4', loading: 'videoLoading4' }
+    ];
+
+    videoContainers.forEach(video => {
+        const videoContainer = document.getElementById(video.container);
+        const loadingElement = document.getElementById(video.loading);
+
+        if (videoContainer && loadingElement) {
+            // 设置超时，如果10秒后还没加载完成，也隐藏加载动画
+            setTimeout(() => {
+                if (!videoContainer.classList.contains('loaded')) {
+                    videoContainer.classList.add('loaded');
+                    loadingElement.style.display = 'none';
+                }
+            }, 10000);
+        }
+    });
+});

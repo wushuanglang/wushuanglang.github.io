@@ -487,6 +487,118 @@ img {
     animation: spin 1s linear infinite;
 }
 
+/* 演示视频部分样式 */
+.demo-video-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.demo-title {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* 视频网格布局 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.video-item {
+    background: var(--bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.video-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.video-title {
+    padding: 1rem 1rem 0.5rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.video-item .video-container {
+    position: relative;
+    margin: 0 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 视频信息区域样式 */
+.video-info {
+    padding: 1rem 1rem 1rem;
+    background: var(--bg-color);
+    position: relative;
+}
+
+.video-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.video-info p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-light);
+}
+
+.video-detail-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.video-item:hover .video-detail-btn {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.video-detail-btn:hover {
+    background-color: var(--dark-color);
+    color: white;
+}
+
 /* 联系方式部分样式 */
 .contact-container {
     display: flex;
@@ -760,6 +872,19 @@ footer {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .video-item .video-container {
+        margin: 0 0.5rem 0;
+    }
+
+    .video-info {
+        padding: 0.75rem 0.5rem 0.75rem;
+    }
 }
 
 /* 首页样式 */
@@ -870,4 +995,10 @@ footer {
     .home-content {
         padding: 1rem;
     }
+}
+
+/* 动画定义 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
