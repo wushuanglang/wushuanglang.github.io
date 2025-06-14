@@ -257,7 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { container: 'demoVideo1', loading: 'videoLoading1' },
         { container: 'demoVideo2', loading: 'videoLoading2' },
         { container: 'demoVideo3', loading: 'videoLoading3' },
-        { container: 'demoVideo4', loading: 'videoLoading4' }
+        { container: 'demoVideo4', loading: 'videoLoading4' },
+        { container: 'demoVideo5', loading: 'videoLoading5' },
+        { container: 'demoVideo6', loading: 'videoLoading6' },
+        { container: 'demoVideo7', loading: 'videoLoading7' }
     ];
 
     videoContainers.forEach(video => {
